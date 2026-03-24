@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Guia de Uso — Visiontech Exp</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --blue:    #008BD1;
+    --dark:    #2C2D2C;
+    --light:   #f4f6f8;
+    --white:   #ffffff;
+    --border:  #dde4ea;
+    --muted:   #7a8a96;
+    --green:   #27ae60;
+    --orange:  #f57f17;
+    --red:     #c0392b;
+    --purple:  #7b1fa2;
+  }
+  html { font-family: 'Sora', sans-serif; background: var(--light); color: var(--dark); }
+  body { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  /* ── Cabeçalho ── */
+  .header {
+    display: flex; align-items: center; gap: 18px;
+    background: var(--dark); border-radius: 16px;
+    padding: 28px 32px; margin-bottom: 40px;
+  }
+  .header-icon { width: 52px; height: 52px; flex-shrink: 0; }
+  .header-title { font-size: 26px; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 4px; font-weight: 300; }
+
+  /* ── Seções ── */
+  .secao { margin-bottom: 36px; }
+  .secao-titulo {
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--blue);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+  }
+  .secao-titulo::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ── Cards de passo ── */
+  .passos { display: flex; flex-direction: column; gap: 12px; }
+  .passo {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 20px;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .passo-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--blue); color: #fff;
+    font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .passo-titulo { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+  .passo-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* ── Status badges ── */
+  .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 600;
+  }
+  .badge-red    { background: #fdf2f2; color: var(--red);    border: 1px solid #f5c6c6; }
+  .badge-orange { background: #fff8e1; color: var(--orange); border: 1px solid #ffe082; }
+  .badge-green  { background: #eafaf1; color: var(--green);  border: 1px solid #a9dfbf; }
+  .badge-blue   { background: #e6f5fc; color: var(--blue);   border: 1px solid #b3dff2; }
+  .badge-purple { background: #f3e5f5; color: var(--purple); border: 1px solid #ce93d8; }
+  .badge-dark   { background: #f5f5f5; color: #555;          border: 1px solid #ddd; }
+
+  /* ── Alertas ── */
+  .alerta {
+    border-radius: 10px; padding: 14px 18px;
+    font-size: 13px; line-height: 1.6; font-weight: 400;
+    display: flex; gap: 10px; align-items: flex-start;
+  }
+  .alerta-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alerta-azul   { background: #e6f5fc; border-left: 3px solid var(--blue);   color: #005a8a; }
+  .alerta-verde  { background: #eafaf1; border-left: 3px solid var(--green);  color: #1a5e34; }
+  .alerta-laranja{ background: #fff8e1; border-left: 3px solid var(--orange); color: #7a4100; }
+  .alerta-roxo   { background: #f3e5f5; border-left: 3px solid var(--purple); color: #4a0d6e; }
+
+  /* ── Fluxo visual ── */
+  .fluxo { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin: 16px 0; }
+  .fluxo-item {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 16px;
+    font-size: 12px; font-weight: 600; color: var(--dark); text-align: center;
+    min-width: 120px;
+  }
+  .fluxo-item.ativo { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .fluxo-seta { font-size: 18px; color: var(--border); padding: 0 6px; }
+
+  /* ── Tabela de botões ── */
+  .tabela-botoes { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tabela-botoes th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid var(--border); background: var(--light); }
+  .tabela-botoes td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  .tabela-botoes tr:last-child td { border-bottom: none; }
+
+  .btn-exemplo {
+    display: inline-block; padding: 5px 12px; border-radius: 6px;
+    font-size: 12px; font-weight: 600; font-family: 'Sora', sans-serif;
+  }
+  .btn-azul   { background: #2d89ef; color: #fff; }
+  .btn-amarelo{ background: #fff8e1; color: var(--orange); border: 1px solid #ffe082; }
+  .btn-vermelho{ background: #fff; color: var(--red); border: 1px solid var(--red); }
+
+  /* ── Divisor ── */
+  .divisor { height: 1px; background: var(--border); margin: 32px 0; }
+
+  /* ── Rodapé ── */
+  .rodape { text-align: center; font-size: 12px; color: var(--muted); margin-top: 48px; font-weight: 300; }
+
+  @media print {
+    body { padding: 20px; background: white; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .badge, .passo-num, .alerta { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  @media (max-width: 600px) {
+    .fluxo { gap: 4px; }
+    .fluxo-item { min-width: 90px; font-size: 11px; padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <svg class="header-icon" viewBox="0 0 340 470" fill="none">
+    <path fill="rgba(255,255,255,0.95)" d="M221.37 30.32c-41.45,-44.4 -118.91,-39.46 -173.01,11.05 -54.1,50.5 -64.36,127.44 -22.91,171.84 41.45,44.4 118.91,39.45 173.01,-11.06 54.1,-50.5 64.36,-127.44 22.91,-171.83zm-46 131.77c-40.81,38.1 -99.26,41.8 -130.55,8.28 -31.3,-33.52 -23.58,-91.58 17.23,-129.68 40.81,-38.09 99.26,-41.8 130.55,-8.28 31.3,33.52 23.58,91.58 -17.23,129.68z"/>
+    <path fill="rgba(255,255,255,0.6)" d="M280.2 143.27c-41.45,-44.4 -118.91,-39.46 -173.01,11.05 -54.1,50.5 -64.36,127.44 -22.91,171.84 41.45,44.4 118.9,39.45 173.01,-11.06 54.1,-50.5 64.35,-127.43 22.91,-171.83zm-46 131.77c-40.81,38.1 -99.26,41.8 -130.55,8.28 -31.3,-33.52 -23.58,-91.58 17.23,-129.68 40.81,-38.09 99.26,-41.8 130.55,-8.28 31.3,33.53 23.58,91.58 -17.23,129.68z"/>
+    <path fill="rgba(255,255,255,0.3)" d="M339.2 256.95c-41.45,-44.4 -118.91,-39.45 -173.01,11.05 -54.1,50.51 -64.36,127.44 -22.91,171.84 41.45,44.4 118.91,39.46 173.01,-11.05 54.1,-50.5 64.36,-127.44 22.91,-171.84zm-46 131.78c-40.8,38.09 -99.26,41.8 -130.55,8.28 -31.3,-33.53 -23.58,-91.59 17.23,-129.68 40.81,-38.1 99.26,-41.81 130.55,-8.28 31.3,33.52 23.58,91.58 -17.23,129.68z"/>
+  </svg>
+  <div>
+    <div class="header-title">Visiontech Exp — Guia de Uso</div>
+    <div class="header-sub">Manual da equipe de expedição · Março 2026</div>
+  </div>
+</div>
+
+<!-- SEÇÃO 1: ACESSO -->
+<div class="secao">
+  <div class="secao-titulo">1. Acessando o sistema</div>
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div>
+        <div class="passo-titulo">Abra o navegador e acesse</div>
+        <div class="passo-desc">Digite na barra de endereço: <strong>https://visiontech-exp.onrender.com</strong><br>Recomendamos usar o Google Chrome para melhor experiência.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div>
+        <div class="passo-titulo">Aguarde carregar</div>
+        <div class="passo-desc">Na primeira vez do dia o sistema pode demorar até 30 segundos para acordar. Aguarde e a tela carregará normalmente.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 2: TELA PRINCIPAL -->
+<div class="secao">
+  <div class="secao-titulo">2. Entendendo a tela</div>
+
+  <div class="alerta alerta-roxo" style="margin-bottom:16px">
+    <span class="alerta-icon">🟣</span>
+    <div><strong>Lista de Pré-faturamento</strong> — aparece no topo quando há pedidos aguardando liberação do financeiro. Use para se preparar com antecedência.</div>
+  </div>
+
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num" style="background:var(--purple)">📋</div>
+      <div>
+        <div class="passo-titulo">Lista de Pré-faturamento (topo)</div>
+        <div class="passo-desc">Mostra pedidos que ainda estão no financeiro mas já podem ser preparados. Clique em <strong>"Abrir e Imprimir"</strong> para ver a Ordem de Faturamento em PDF. O item ficará riscado após a impressão.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num" style="background:var(--red)">🧾</div>
+      <div>
+        <div class="passo-titulo">Coluna "A Faturar"</div>
+        <div class="passo-desc">Pedidos liberados pelo financeiro e prontos para iniciar o processo de expedição.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num" style="background:var(--orange)">📦</div>
+      <div>
+        <div class="passo-titulo">Coluna "Em Separação"</div>
+        <div class="passo-desc">Pedidos que estão sendo separados no estoque.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num" style="background:var(--green)">✅</div>
+      <div>
+        <div class="passo-titulo">Coluna "Faturado"</div>
+        <div class="passo-desc">Pedidos faturados aguardando envio para a transportadora.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 3: FLUXO DO PEDIDO -->
+<div class="secao">
+  <div class="secao-titulo">3. Fluxo do pedido</div>
+
+  <div class="fluxo">
+    <div class="fluxo-item" style="background:#f3e5f5;color:var(--purple);border-color:#ce93d8">🟣 Pré-faturamento</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item" style="background:#fdf2f2;color:var(--red);border-color:#f5c6c6">🧾 A Faturar</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item" style="background:#fff8e1;color:var(--orange);border-color:#ffe082">📦 Em Separação</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item" style="background:#eafaf1;color:var(--green);border-color:#a9dfbf">✅ Faturado</div>
+    <div class="fluxo-seta">→</div>
+    <div class="fluxo-item ativo">🚚 Enviado</div>
+  </div>
+
+  <div class="alerta alerta-azul" style="margin-top:12px">
+    <span class="alerta-icon">ℹ️</span>
+    <div>O sistema atualiza automaticamente a cada 30 segundos. Novos pedidos aparecem sem precisar recarregar a página.</div>
+  </div>
+</div>
+
+<!-- SEÇÃO 4: TRABALHANDO COM UM PEDIDO -->
+<div class="secao">
+  <div class="secao-titulo">4. Trabalhando com um pedido</div>
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div>
+        <div class="passo-titulo">Abra o PDF da Ordem de Faturamento</div>
+        <div class="passo-desc">Clique no botão laranja <strong>"📄 Ordem de Faturamento"</strong> dentro do card para abrir o PDF no navegador.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div>
+        <div class="passo-titulo">Mude o status conforme o andamento</div>
+        <div class="passo-desc">Use o campo <strong>Status</strong> dentro do card para indicar em qual etapa o pedido está.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div>
+        <div class="passo-titulo">Preencha NF e Rastreio ao enviar</div>
+        <div class="passo-desc">Quando o pedido for enviado, preencha o <strong>número da NF</strong> e o <strong>código de rastreio</strong> antes de salvar como Enviado.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">4</div>
+      <div>
+        <div class="passo-titulo">Clique em 💾 Salvar</div>
+        <div class="passo-desc">O sistema atualiza o CRM automaticamente com o status, NF e rastreio. O card sairá do kanban ao ser marcado como <strong>Enviado</strong>.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SEÇÃO 5: STATUS DISPONÍVEIS -->
+<div class="secao">
+  <div class="secao-titulo">5. Status disponíveis</div>
+  <div class="badges">
+    <span class="badge badge-red">🧾 A faturar</span>
+    <span class="badge badge-orange">📦 Em separação</span>
+    <span class="badge badge-green">✅ Faturado</span>
+    <span class="badge badge-blue">🚚 Enviado</span>
+    <span class="badge badge-dark" style="color:var(--orange);border-color:#ffe082;background:#fff8e1">⚠️ Voltar ao Comercial</span>
+  </div>
+
+  <div class="alerta alerta-laranja" style="margin-top:12px">
+    <span class="alerta-icon">⚠️</span>
+    <div><strong>Voltar ao Comercial</strong> — use apenas quando houver um problema que impeça o andamento do pedido. O sistema pedirá uma confirmação antes de executar e o card retornará automaticamente para o time comercial no CRM.</div>
+  </div>
+</div>
+
+<!-- SEÇÃO 6: BOTÕES DO CARD -->
+<div class="secao">
+  <div class="secao-titulo">6. Botões de cada card</div>
+  <table class="tabela-botoes">
+    <thead>
+      <tr><th>Botão</th><th>O que faz</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="btn-exemplo btn-azul">💾 Salvar</span></td>
+        <td>Salva o status, NF e rastreio. Atualiza o CRM automaticamente.</td>
+      </tr>
+      <tr>
+        <td><span class="btn-exemplo btn-amarelo">⚠️ Reportar Problema</span></td>
+        <td>Abre formulário para reportar um erro. Envia mensagem via WhatsApp direto para o vendedor responsável pelo pedido.</td>
+      </tr>
+      <tr>
+        <td><span class="btn-exemplo btn-vermelho">🗑️ Excluir card</span></td>
+        <td>Remove o pedido do sistema. Use apenas se o card foi inserido por engano.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SEÇÃO 7: REPORTAR PROBLEMA -->
+<div class="secao">
+  <div class="secao-titulo">7. Como reportar um problema</div>
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div>
+        <div class="passo-titulo">Clique em "⚠️ Reportar Problema"</div>
+        <div class="passo-desc">O botão amarelo fica abaixo do botão Salvar em cada card.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div>
+        <div class="passo-titulo">Escolha o tipo do problema</div>
+        <div class="passo-desc">Selecione uma das opções: <strong>Erro no cadastro do cliente</strong>, <strong>Anexo incorreto ou ausente</strong>, <strong>Pedido duplicado</strong> ou <strong>Outro</strong>.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div>
+        <div class="passo-titulo">Descreva o problema (opcional)</div>
+        <div class="passo-desc">Use o campo de observação para dar mais detalhes sobre o que está errado.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">4</div>
+      <div>
+        <div class="passo-titulo">Clique em "📲 Enviar no WhatsApp"</div>
+        <div class="passo-desc">O WhatsApp abrirá com a mensagem já formatada. Clique em <strong>Enviar</strong> para notificar o vendedor responsável pelo pedido.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alerta alerta-verde" style="margin-top:16px">
+    <span class="alerta-icon">✅</span>
+    <div>O pedido <strong>não é bloqueado</strong> ao reportar uma ocorrência — ele continua normalmente no kanban enquanto o problema é resolvido.</div>
+  </div>
+</div>
+
+<!-- SEÇÃO 8: DICAS -->
+<div class="secao">
+  <div class="secao-titulo">8. Dicas importantes</div>
+  <div class="passos">
+    <div class="passo">
+      <div class="passo-num" style="background:#555">💡</div>
+      <div>
+        <div class="passo-titulo">Sempre preencha NF e Rastreio antes de marcar como Enviado</div>
+        <div class="passo-desc">Essas informações são enviadas automaticamente para o CRM e ficam registradas para consulta futura.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num" style="background:#555">💡</div>
+      <div>
+        <div class="passo-titulo">Use a lista de Pré-faturamento para se organizar</div>
+        <div class="passo-desc">Imprima as ordens de faturamento com antecedência para agilizar o processo quando o financeiro liberar.</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num" style="background:#555">💡</div>
+      <div>
+        <div class="passo-titulo">Não use "Excluir card" para pedidos reais</div>
+        <div class="passo-desc">Use apenas se um card entrou por engano. Para problemas no pedido, use "Reportar Problema" ou "Voltar ao Comercial".</div>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num" style="background:#555">💡</div>
+      <div>
+        <div class="passo-titulo">Problemas técnicos?</div>
+        <div class="passo-desc">Entre em contato com o Rudnei pelo WhatsApp: <strong>(31) 99399-6582</strong></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="rodape">
+  Visiontech Medical Optics · Sistema interno de expedição · Março 2026<br>
+  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#b0bec5">visiontech-exp.onrender.com</span>
+</div>
+
+</body>
+</html>
